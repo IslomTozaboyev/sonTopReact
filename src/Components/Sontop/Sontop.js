@@ -114,6 +114,7 @@ export default class Sontop extends Component {
         </div>
         <audio src={this.state.b && win || this.state.c && lose} className="visually-hidden" autoPlay></audio>
       </div>
+      //fdff
     );
   }
 }
