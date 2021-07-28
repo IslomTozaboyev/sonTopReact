@@ -4,6 +4,12 @@ import loseimg from "../../img/lose.png";
 import winimg from "../../img/win.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import ReactJkMusicPlayer from 'react-jinke-music-player'
+import 'react-jinke-music-player/assets/index.css'
+import lose from "../../audio/losegame.wav";
+import win from "../../audio/wingame.wav";
+
+
 export default class Sontop extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +27,7 @@ export default class Sontop extends Component {
     console.log(this.state.son);
   }
 
+ 
   valueInput = (event) => {
     this.setState((state) => {
       console.log(event.target.value);
@@ -30,7 +37,7 @@ export default class Sontop extends Component {
 
   find = () => {
     this.setState((state) => {
-      if (this.state.son == this.state.value) {
+       if (this.state.son == this.state.value) {
         return { text: "Topdingiz", b: true };
       } else if (this.state.a == 1) {
         return {
@@ -38,11 +45,12 @@ export default class Sontop extends Component {
           text: "yutqazdingiz",
           c: true,
           text1: "Imkoniyatingiz tugadi",
+          
         };
-      } else if (this.state.son > this.state.value) {
-        return { a: state.a - 1, text: "Kattaroq son kiriting" };
-      } else if (this.state.son < this.state.value) {
-        return { a: state.a - 1, text: "Kichikroq son kiriting" };
+      } else if (this.state.son > this.state.value && this.state.value != "") {
+        return { a: state.a - 1, text: "Kattaroq son kiriting" ,value: ""};
+      } else if (this.state.son < this.state.value && this.state.value != "") {
+        return { a: state.a - 1, text: "Kichikroq son kiriting" ,value: ""};
       }
     });
   };
@@ -66,12 +74,13 @@ export default class Sontop extends Component {
             className="form-control input shadow-none"
             type="text"
             placeholder="Komputer o'ylagan sonni toping"
-            value={this.value}
+            value={this.state.value}
             onChange={this.valueInput}
           />
           <button className="btn btn-primary mt-4" onClick={this.find}>
             Topdim
           </button>
+      
         </div>
 
         <div
@@ -103,6 +112,7 @@ export default class Sontop extends Component {
             </button>
           </div>
         </div>
+        <audio src={this.state.b && win || this.state.c && lose} className="visually-hidden" autoPlay></audio>
       </div>
     );
   }
